@@ -1,4 +1,4 @@
-FROM multiarch/debian-debootstrap:armhf-buster
+FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
 env MOSQUITTOVERSION <<MOSQUITTOVERSION>>
@@ -7,9 +7,7 @@ env USERID 9002
 # based on https://github.com/fstehle/docker-rpi-mosquitto
 
 RUN passwd -l root ; \
-    apt-get update && \
-    apt-get install -yq bash apt-transport-https curl gnupg && \
-    apt-get install -yq openssl build-essential libssl-dev libc-ares-dev libwebsockets-dev && \
+    apk --update --upgrade --no-cache add bash openssl libwebsockets gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
     mkdir -p /usr/src ; \
     cd /usr/src && \
     wget https://mosquitto.org/files/source/mosquitto-${MOSQUITTOVERSION}.tar.gz && \
@@ -19,13 +17,13 @@ RUN passwd -l root ; \
     make install && \
     mkdir -p /mqtt/log /mqtt/data ; \
     mv /etc/mosquitto /mqtt/config && \
-    adduser --system --uid $USERID --disabled-password --disabled-login mosquitto && \
+    adduser -S -u ${USERID} -D -H -s /bin/false mosquitto && \
     ln -s /mqtt/config /etc/mosquitto && \
-    chown mosquitto /mqtt/log /mqtt/data /mqtt/config -R && \
-    apt-get remove -yq build-essential libssl-dev libc-ares-dev libwebsockets-dev && \
-    apt-get clean -y && \
+    chown mosquitto /mqtt/log /mqtt/data /mqtt/config && \
+    apk --update --upgrade --no-cache del gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
     cd / && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/src/*
+    rm -rf /tmp/* /var/tmp/* /usr/src
+
 
 COPY config /etc/mosquitto
 
