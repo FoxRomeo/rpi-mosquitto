@@ -26,7 +26,7 @@ pipeline {
 			returnStdout: true,
 			script: '/bin/bash ./get_version.sh'
 			).trim()}"""
-		SOFTWARESTRING = "<<TORVERSION>>"
+		SOFTWARESTRING = "<<MOSQUITTOVERSION>>"
 		TARGETVERSION = "${SOFTWAREVERSION}"
 	}
 	stages {
