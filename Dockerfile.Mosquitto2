@@ -8,6 +8,7 @@ env USERID 9002
 
 RUN passwd -l root ; \
     apk --update --upgrade --no-cache add bash openssl libwebsockets gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
+    apk --update add cjson --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community && \
     mkdir -p /usr/src ; \
     cd /usr/src && \
     wget https://mosquitto.org/files/source/mosquitto-${MOSQUITTOVERSION}.tar.gz && \
