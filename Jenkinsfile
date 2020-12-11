@@ -30,24 +30,13 @@ pipeline {
 		TARGETVERSION = "${SOFTWAREVERSION}"
 	}
 	stages {
-		stage('Build Version 2.x') {
+		stage('Build with Version depending dockerfile') {
 			when {
 				expression { return TARGETVERSION.startsWith("2") }
 			}
 			environment {
 				ACTION = "build"
 				BASETYPE = "Mosquitto2"
-			}
-			steps {
-				sh '/bin/bash ./action.sh'
-			}
-		}
-		stage('Build Version 1.x') {
-			when {
-				expression { return TARGETVERSION.startsWith("1") }
-			}
-			environment {
-				ACTION = "build"
 			}
 			steps {
 				sh '/bin/bash ./action.sh'
