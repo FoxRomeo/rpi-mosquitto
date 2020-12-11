@@ -23,7 +23,7 @@ RUN passwd -l root ; \
     chown mosquitto /mqtt/log /mqtt/data /mqtt/config && \
     apk --update --no-cache del gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
     cd / && \
-    rm -rf /tmp/* /var/tmp/* /usr/src ;
+    rm -rf /tmp/* /var/tmp/* /usr/src ; \
     test  -x /usr/local/sbin/mosquitto
 
 
