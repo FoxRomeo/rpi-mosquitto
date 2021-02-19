@@ -1,5 +1,5 @@
 FROM <<BASECONTAINER>>
-#FROM arm32v6/alpine:latest
+#FROM arm32v6/alpine:3.12
 MAINTAINER docker@intrepid.de
 
 env MOSQUITTOVERSION <<MOSQUITTOVERSION>>
