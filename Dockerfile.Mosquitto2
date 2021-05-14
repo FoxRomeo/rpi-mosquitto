@@ -21,7 +21,7 @@ RUN passwd -l root ; \
     mv /etc/mosquitto /mqtt/config && \
     adduser -S -u ${USERID} -D -H -s /bin/false mosquitto && \
     ln -s /mqtt/config /etc/mosquitto && \
-    chown mosquitto /mqtt/log /mqtt/data /mqtt/config && \
+    chown mosquitto /mqtt/log /mqtt/data /mqtt/config /run && \
     apk --update --no-cache del gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
     cd / && \
     rm -rf /tmp/* /var/tmp/* /usr/src ; \
