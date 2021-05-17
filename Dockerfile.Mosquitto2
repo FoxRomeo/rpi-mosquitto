@@ -7,6 +7,7 @@ env USERID 9002
 
 # based on https://github.com/fstehle/docker-rpi-mosquitto
 
+COPY health.sh /
 RUN passwd -l root ; \
     apk --update --upgrade --no-cache add bash openssl libwebsockets gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
     apk --update add cjson cjson-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main && \
@@ -34,4 +35,6 @@ VOLUME ["/etc/mosquitto", "/mqtt/data", "/mqtt/log"]
 
 EXPOSE 1883 8883 9001
 CMD ["/usr/local/sbin/mosquitto", "-c", "/etc/mosquitto/mosquitto.conf"]
+
+HEALTHCHECK --start-period=3m --interval=3m --timeout=10s CMD /health.sh
 
