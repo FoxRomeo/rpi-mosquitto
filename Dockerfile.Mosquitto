@@ -9,7 +9,18 @@ env USERID 9002
 
 COPY health.sh /
 RUN passwd -l root ; \
-    apk --update --upgrade --no-cache add bash openssl libwebsockets gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
+    apk --update --upgrade --no-cache add \
+      bash \
+      openssl \
+      libwebsockets \
+      libedit \
+      gcc \
+      make \
+      alpine-sdk \
+      openssl-dev \
+      libwebsockets-dev \
+      libedit-dev \
+      musl-dev && \
     mkdir -p /usr/src ; \
     cd /usr/src && \
     wget https://mosquitto.org/files/source/mosquitto-${MOSQUITTOVERSION}.tar.gz && \
@@ -22,7 +33,14 @@ RUN passwd -l root ; \
     adduser -S -u ${USERID} -D -H -s /bin/false mosquitto && \
     ln -s /mqtt/config /etc/mosquitto && \
     chown mosquitto /mqtt/log /mqtt/data /mqtt/config && \
-    apk --update --no-cache del gcc make alpine-sdk openssl-dev libwebsockets-dev musl-dev && \
+    apk --update --no-cache del \
+      gcc \
+      make \
+      alpine-sdk \
+      openssl-dev \
+      libwebsockets-dev \
+      libedit-dev \
+      musl-dev && \
     cd / && \
     rm -rf /tmp/* /var/tmp/* /usr/src ; \
     test  -x /usr/local/sbin/mosquitto
