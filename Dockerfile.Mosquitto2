@@ -14,6 +14,7 @@ RUN passwd -l root ; \
       openssl \
       libwebsockets \
       libedit \
+      libmicrohttpd \
       gcc \
       make \
       alpine-sdk \
@@ -41,6 +42,7 @@ RUN passwd -l root ; \
       openssl-dev \
       libwebsockets-dev \
       libedit-dev \
+      libmicrohttpd-dev \
       musl-dev && \
     cd / && \
     rm -rf /tmp/* /var/tmp/* /usr/src ; \
