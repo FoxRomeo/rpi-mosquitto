@@ -15,6 +15,7 @@ RUN passwd -l root ; \
       libwebsockets \
       libedit \
       libmicrohttpd \
+      sqlite-libs \
       gcc \
       make \
       alpine-sdk \
@@ -22,6 +23,7 @@ RUN passwd -l root ; \
       libwebsockets-dev \
       libedit-dev \
       libmicrohttpd-dev \
+      sqlite-dev \
       musl-dev && \
     apk --update add cjson cjson-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main && \
     mkdir -p /usr/src && \
@@ -44,6 +46,7 @@ RUN passwd -l root ; \
       libwebsockets-dev \
       libedit-dev \
       libmicrohttpd-dev \
+      sqlite-dev \
       musl-dev && \
     cd / && \
     rm -rf /tmp/* /var/tmp/* /usr/src ; \
