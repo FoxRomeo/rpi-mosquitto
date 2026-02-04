@@ -21,6 +21,7 @@ RUN passwd -l root ; \
       openssl-dev \
       libwebsockets-dev \
       libedit-dev \
+      libmicrohttpd-dev \
       musl-dev && \
     apk --update add cjson cjson-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main && \
     mkdir -p /usr/src && \
