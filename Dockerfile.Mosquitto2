@@ -1,6 +1,7 @@
 FROM <<BASECONTAINER>>
-#FROM arm32v6/alpine:3.12
-MAINTAINER docker@intrepid.de
+#FROM arm32v6/alpine:3.23
+
+LABEL maintainer="docker@intrepid.de"
 
 env MOSQUITTOVERSION <<MOSQUITTOVERSION>>
 env USERID 9002
