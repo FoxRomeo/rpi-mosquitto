@@ -19,6 +19,7 @@ RUN passwd -l root ; \
       sqlite-libs \
       gcc \
       make \
+      curl \
       alpine-sdk \
       openssl-dev \
       libwebsockets-dev \
@@ -29,7 +30,7 @@ RUN passwd -l root ; \
     apk --update add cjson cjson-dev --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main && \
     mkdir -p /usr/src && \
     cd /usr/src && \
-    wget https://mosquitto.org/files/source/mosquitto-${MOSQUITTOVERSION}.tar.gz && \
+    curl -fSL --retry 5 --retry-delay 10 --retry-all-errors -o mosquitto-${MOSQUITTOVERSION}.tar.gz https://mosquitto.org/files/source/mosquitto-${MOSQUITTOVERSION}.tar.gz && \
     tar xzvf mosquitto-${MOSQUITTOVERSION}.tar.gz && \
     cd mosquitto-${MOSQUITTOVERSION} && \
     make WITH_DOCS=no WITH_WEBSOCKETS=yes WITH_TLS=yes WITH_TLS_PSK=yes WITH_BRIDGE=yes WITH_PERSISTENCE=yes WITH_MEMORY_TRACKING=no WITH_SYS_STATE=yes && \
@@ -42,6 +43,7 @@ RUN passwd -l root ; \
     apk --update --no-cache del \
       gcc \
       make \
+      curl \
       alpine-sdk \
       openssl-dev \
       libwebsockets-dev \
